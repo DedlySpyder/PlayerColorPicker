@@ -2,7 +2,7 @@ ENABLE_SPECTATOR    = true
 ENABLE_GM           = false
 HIDE_OBJECT         = false
 
-COLOR_PICKER_XML_URL = "https://gist.githubusercontent.com/DedlySpyder/9333d9861dd176635329c97edb7fb172/raw/"
+COLOR_PICKER_XML_URL = "https://raw.githubusercontent.com/DedlySpyder/PlayerColorPicker/0.1.0/xml/player_color_picker.xml"
 
 function onLoad()
     if not Global.getVar("DEDLY_PLAYER_COLOR_PICKER_ENABLED") then
