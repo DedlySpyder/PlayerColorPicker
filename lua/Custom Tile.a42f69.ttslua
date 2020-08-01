@@ -1,0 +1,92 @@
+ENABLE_SPECTATOR    = true
+ENABLE_GM           = false
+HIDE_OBJECT         = false
+
+COLOR_PICKER_XML_URL = "https://gist.githubusercontent.com/DedlySpyder/9333d9861dd176635329c97edb7fb172/raw/"
+
+function onLoad()
+    if not Global.getVar("DEDLY_PLAYER_COLOR_PICKER_ENABLED") then
+        WebRequest.get(COLOR_PICKER_XML_URL, addColorPickerXml)
+        Wait.time(function()
+            UI.hide("dedlyPlayerColorPickerExpandColors")
+        end, 1)
+        Global.setVar("DEDLY_PLAYER_COLOR_PICKER_ENABLED", true)
+    end
+    showColorPicker()
+
+    if HIDE_OBJECT then
+        hideAbsolutely()
+    end
+end
+
+function hideAbsolutely()
+    self.interactable = false
+    self.tooltip = false
+    self.lock()
+
+    for _, component in ipairs(self.getComponents()) do
+        -- This is sometimes MeshCollider or BoxCollider
+        if string.find(component.name, "Collider") then
+            component.set("enabled", false)
+        end
+    end
+    self.getComponent("AudioSource").set("enabled", false)
+    self.getComponent("MeshRenderer").set("enabled", false)
+end
+
+function addColorPickerXml(response)
+    local pickerXml = string.gsub(response.text, "{{GUID}}", self.guid)
+    local currentXml = UI.getXml()
+    local newXml = currentXml .. pickerXml
+    UI.setXml(newXml)
+end
+
+function onChangeColor(player, _, color)
+    color = string.sub(color, string.len("dedlyPlayerColorPicker_") + 1)
+    if validColor(color) then
+        if color ~= "Grey" and Player[color].seated then
+            player.broadcast("Someone is already that color, try another")
+        else
+            if color == "Grey" and not ENABLE_SPECTATOR then
+                player.broadcast("Switching to a Spectator is not allowed")
+            elseif color == "Black" and not ENABLE_GM then
+                player.broadcast("Switching to the GM is not allowed")
+            else
+                player.changeColor(color)
+            end
+        end
+    end
+end
+
+function validColor(color)
+    for _, check in ipairs(Player.getColors()) do
+        if check == color then return true end
+    end
+    return false
+end
+
+function collapseColorPicker()
+    UI.hide("dedlyPlayerColorPickerColorButtons")
+    UI.show("dedlyPlayerColorPickerExpandColors")
+    UI.hide("dedlyPlayerColorPickerCollapseColors")
+
+    UI.setAttribute("dedlyPlayerColorPicker", "height", 30)
+end
+
+function expandColorPicker()
+    UI.show("dedlyPlayerColorPickerColorButtons")
+    UI.show("dedlyPlayerColorPickerCollapseColors")
+    UI.hide("dedlyPlayerColorPickerExpandColors")
+
+    UI.setAttribute("dedlyPlayerColorPicker", "height", 400)
+end
+
+function closeColorPicker()
+    UI.hide("dedlyPlayerColorPicker")
+    self.destruct()
+end
+
+function showColorPicker()
+    UI.show("dedlyPlayerColorPicker")
+    expandColorPicker()
+end
