@@ -1,5 +1,5 @@
 
-<Panel id="dedlyPlayerColorPicker" padding="5" rectAlignment="MiddleRight" color="rgba(0.75, 0.75, 0.75, 0.5)" height="400" width="200" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+<Panel id="dedlyPlayerColorPicker" padding="5" rectAlignment="MiddleRight" color="rgba(0.75, 0.75, 0.75, 0.5)" height="{{HEIGHT}}" width="200" allowDragging="true" returnToOriginalPositionWhenReleased="false">
     <VerticalLayout color="rgb(0.9, 0.9, 0.9)">
         <Panel>
             <Button id="dedlyPlayerColorPickerCollapseColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/collapseColorPicker">V</Button>
