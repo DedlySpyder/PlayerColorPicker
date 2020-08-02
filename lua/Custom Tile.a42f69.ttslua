@@ -2,9 +2,20 @@ ENABLE_SPECTATOR    = true
 ENABLE_GM           = false
 HIDE_OBJECT         = false
 
-COLOR_PICKER_XML_URL = "https://raw.githubusercontent.com/DedlySpyder/PlayerColorPicker/0.1.0/xml/player_color_picker.xml"
+COLOR_PICKER_XML_URL = "https://raw.githubusercontent.com/DedlySpyder/PlayerColorPicker/dev/xml/player_color_picker.xml"
+-- COLOR_PICKER_XML_URL = "https://gist.githubusercontent.com/DedlySpyder/9333d9861dd176635329c97edb7fb172/raw/"
+
+COLOR_BUTTON_ID_PREFIX = "dedlyPlayerColorPicker_"
+
+STATIC_COLORS = { "Grey", "Black" }
+CURRENT_COLORS = {}
 
 function onLoad()
+    CURRENT_COLORS = Player.getAvailableColors()
+    for _, color in ipairs(STATIC_COLORS) do
+        table.insert(CURRENT_COLORS, color)
+    end
+
     if not Global.getVar("DEDLY_PLAYER_COLOR_PICKER_ENABLED") then
         WebRequest.get(COLOR_PICKER_XML_URL, addColorPickerXml)
         Wait.time(function()
@@ -35,14 +46,33 @@ function hideAbsolutely()
 end
 
 function addColorPickerXml(response)
-    local pickerXml = string.gsub(response.text, "{{GUID}}", self.guid)
+    local pickerXml = mustacheColorPickerXml(response.text)
     local currentXml = UI.getXml()
     local newXml = currentXml .. pickerXml
     UI.setXml(newXml)
 end
 
+function mustacheColorPickerXml(xml)
+    xml = string.gsub(xml, "{{BUTTONS}}", getColorButtonsXml())
+    xml = string.gsub(xml, "{{HEIGHT}}", getHeight())
+    return string.gsub(xml, "{{GUID}}", self.guid)
+end
+
+function getColorButtonsXml()
+    local buttons = ""
+    for _, color in ipairs(CURRENT_COLORS) do
+        if color == "Black" or color == "Brown" then
+            buttons = buttons .. '            <Button id="' .. COLOR_BUTTON_ID_PREFIX .. color ..'" color="' .. color .. '" onClick="{{GUID}}/onChangeColor"><Text color="White">' .. color .. '</Text></Button>\r\n'
+        else
+            buttons = buttons .. '            <Button id="' .. COLOR_BUTTON_ID_PREFIX .. color ..'" color="' .. color .. '" onClick="{{GUID}}/onChangeColor">' .. color .. '</Button>\r\n'
+        end
+
+    end
+    return buttons
+end
+
 function onChangeColor(player, _, color)
-    color = string.sub(color, string.len("dedlyPlayerColorPicker_") + 1)
+    color = string.sub(color, string.len(COLOR_BUTTON_ID_PREFIX) + 1)
     if validColor(color) then
         if color ~= "Grey" and Player[color].seated then
             player.broadcast("Someone is already that color, try another")
@@ -65,6 +95,10 @@ function validColor(color)
     return false
 end
 
+function getHeight()
+    return #CURRENT_COLORS * 32
+end
+
 function collapseColorPicker()
     UI.hide("dedlyPlayerColorPickerColorButtons")
     UI.show("dedlyPlayerColorPickerExpandColors")
@@ -78,7 +112,7 @@ function expandColorPicker()
     UI.show("dedlyPlayerColorPickerCollapseColors")
     UI.hide("dedlyPlayerColorPickerExpandColors")
 
-    UI.setAttribute("dedlyPlayerColorPicker", "height", 400)
+    UI.setAttribute("dedlyPlayerColorPicker", "height", getHeight())
 end
 
 function closeColorPicker()
