@@ -7,13 +7,17 @@ COLOR_PICKER_XML_URL = "https://raw.githubusercontent.com/DedlySpyder/PlayerColo
 COLOR_BUTTON_ID_PREFIX = "dedlyPlayerColorPicker_"
 ROW_HEIGHT = 44
 
-STATIC_COLORS = { "Grey", "Black" }
 CURRENT_COLORS = {}
 
 function onLoad()
     CURRENT_COLORS = Player.getAvailableColors()
-    for _, color in ipairs(STATIC_COLORS) do
-        table.insert(CURRENT_COLORS, color)
+
+    if ENABLE_SPECTATOR then
+        table.insert(CURRENT_COLORS, "Grey")
+    end
+
+    if ENABLE_GM then
+        table.insert(CURRENT_COLORS, "Black")
     end
 
     if not Global.getVar("DEDLY_PLAYER_COLOR_PICKER_ENABLED") then
