@@ -3,9 +3,9 @@ ENABLE_GM           = false
 HIDE_OBJECT         = false
 
 COLOR_PICKER_XML_URL = "https://raw.githubusercontent.com/DedlySpyder/PlayerColorPicker/dev/xml/player_color_picker.xml"
--- COLOR_PICKER_XML_URL = "https://gist.githubusercontent.com/DedlySpyder/9333d9861dd176635329c97edb7fb172/raw/"
 
 COLOR_BUTTON_ID_PREFIX = "dedlyPlayerColorPicker_"
+ROW_HEIGHT = 44
 
 STATIC_COLORS = { "Grey", "Black" }
 CURRENT_COLORS = {}
@@ -54,7 +54,7 @@ end
 
 function mustacheColorPickerXml(xml)
     xml = string.gsub(xml, "{{BUTTONS}}", getColorButtonsXml())
-    xml = string.gsub(xml, "{{HEIGHT}}", getHeight())
+    xml = string.gsub(xml, "{{HEIGHT}}", getPickerHeight())
     return string.gsub(xml, "{{GUID}}", self.guid)
 end
 
@@ -95,8 +95,8 @@ function validColor(color)
     return false
 end
 
-function getHeight()
-    return #CURRENT_COLORS * 32
+function getPickerHeight()
+    return #CURRENT_COLORS * ROW_HEIGHT
 end
 
 function collapseColorPicker()
@@ -104,7 +104,7 @@ function collapseColorPicker()
     UI.show("dedlyPlayerColorPickerExpandColors")
     UI.hide("dedlyPlayerColorPickerCollapseColors")
 
-    UI.setAttribute("dedlyPlayerColorPicker", "height", 30)
+    UI.setAttribute("dedlyPlayerColorPicker", "height", ROW_HEIGHT)
 end
 
 function expandColorPicker()
@@ -112,7 +112,7 @@ function expandColorPicker()
     UI.show("dedlyPlayerColorPickerCollapseColors")
     UI.hide("dedlyPlayerColorPickerExpandColors")
 
-    UI.setAttribute("dedlyPlayerColorPicker", "height", getHeight())
+    UI.setAttribute("dedlyPlayerColorPicker", "height", getPickerHeight())
 end
 
 function closeColorPicker()
