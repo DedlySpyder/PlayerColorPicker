@@ -2,8 +2,8 @@
 <Panel id="dedlyPlayerColorPicker" padding="5" rectAlignment="MiddleRight" color="rgba(0.75, 0.75, 0.75, 0.5)" height="{{HEIGHT}}" width="200" allowDragging="true" returnToOriginalPositionWhenReleased="false">
     <VerticalLayout color="rgb(0.9, 0.9, 0.9)">
         <Panel>
-            <Button id="dedlyPlayerColorPickerCollapseColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/collapseColorPicker">\u{2191}</Button>
-            <Button id="dedlyPlayerColorPickerExpandColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/expandColorPicker">\u{2193}</Button>
+            <Button id="dedlyPlayerColorPickerCollapseColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/collapseColorPicker"><Text>\u{2191}</Text></Button>
+            <Button id="dedlyPlayerColorPickerExpandColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/expandColorPicker"><Text>\u{2193}</Text></Button>
             <Text>Player Color Picker</Text>
             <Button color="Red" offsetXY="85 0" width="20" onClick="{{GUID}}/closeColorPicker">X</Button>
         </Panel>
