@@ -5,7 +5,7 @@
             <Button id="dedlyPlayerColorPickerCollapseColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/collapseColorPicker" tooltip="Collapse" tooltipPosition="Above"><Text>↑</Text></Button>
             <Button id="dedlyPlayerColorPickerExpandColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/expandColorPicker" tooltip="Expand" tooltipPosition="Above"><Text>↓</Text></Button>
             <Text>Player Color Picker</Text>
-            <Button color="Red" offsetXY="85 0" width="20" onClick="{{GUID}}/closeColorPicker">X</Button>
+            <Button color="Red" offsetXY="85 0" width="20" onClick="{{GUID}}/closeColorPicker" tooltip="Close" tooltipPosition="Above">X</Button>
         </Panel>
         <VerticalLayout id="dedlyPlayerColorPickerColorButtons">
             {{BUTTONS}}
