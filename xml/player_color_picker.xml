@@ -1,24 +1,14 @@
-<Panel id="dedlyPlayerColorPicker" padding="5" rectAlignment="MiddleRight" color="rgba(0.75, 0.75, 0.75, 0.5)" height="400" width="200" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+
+<Panel id="dedlyPlayerColorPicker" padding="5" rectAlignment="MiddleRight" color="rgba(0.75, 0.75, 0.75, 0.5)" height="{{HEIGHT}}" width="200" allowDragging="true" returnToOriginalPositionWhenReleased="false">
     <VerticalLayout color="rgb(0.9, 0.9, 0.9)">
         <Panel>
-            <Button id="dedlyPlayerColorPickerCollapseColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/collapseColorPicker">V</Button>
-            <Button id="dedlyPlayerColorPickerExpandColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/expandColorPicker">0</Button>
+            <Button id="dedlyPlayerColorPickerCollapseColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/collapseColorPicker" tooltip="Collapse" tooltipPosition="Above"><Text>↑</Text></Button>
+            <Button id="dedlyPlayerColorPickerExpandColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/expandColorPicker" tooltip="Expand" tooltipPosition="Above"><Text>↓</Text></Button>
             <Text>Player Color Picker</Text>
-            <Button color="Red" offsetXY="85 0" width="20" onClick="{{GUID}}/closeColorPicker">X</Button>
+            <Button color="Red" offsetXY="85 0" width="20" onClick="{{GUID}}/closeColorPicker" tooltip="Close" tooltipPosition="Above">X</Button>
         </Panel>
         <VerticalLayout id="dedlyPlayerColorPickerColorButtons">
-            <Button id="dedlyPlayerColorPicker_White" color="White" onClick="{{GUID}}/onChangeColor">White</Button>
-            <Button id="dedlyPlayerColorPicker_Brown" color="Brown" onClick="{{GUID}}/onChangeColor"><Text color="White">Brown</Text></Button>
-            <Button id="dedlyPlayerColorPicker_Red" color="Red" onClick="{{GUID}}/onChangeColor">Red</Button>
-            <Button id="dedlyPlayerColorPicker_Orange" color="Orange" onClick="{{GUID}}/onChangeColor">Orange</Button>
-            <Button id="dedlyPlayerColorPicker_Yellow" color="Yellow" onClick="{{GUID}}/onChangeColor">Yellow</Button>
-            <Button id="dedlyPlayerColorPicker_Green" color="Green" onClick="{{GUID}}/onChangeColor">Green</Button>
-            <Button id="dedlyPlayerColorPicker_Teal" color="Teal" onClick="{{GUID}}/onChangeColor">Teal</Button>
-            <Button id="dedlyPlayerColorPicker_Blue" color="Blue" onClick="{{GUID}}/onChangeColor">Blue</Button>
-            <Button id="dedlyPlayerColorPicker_Purple" color="Purple" onClick="{{GUID}}/onChangeColor">Purple</Button>
-            <Button id="dedlyPlayerColorPicker_Pink" color="Pink" onClick="{{GUID}}/onChangeColor">Pink</Button>
-            <Button id="dedlyPlayerColorPicker_Grey" color="Grey" onClick="{{GUID}}/onChangeColor">Spectator</Button>
-            <Button id="dedlyPlayerColorPicker_Black" color="Black" onClick="{{GUID}}/onChangeColor"><Text color="White">GM</Text></Button>
+            {{BUTTONS}}
         </VerticalLayout>
     </VerticalLayout>
 </Panel>
