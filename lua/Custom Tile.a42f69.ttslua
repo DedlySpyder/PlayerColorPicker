@@ -2,7 +2,7 @@ ENABLE_SPECTATOR    = true
 ENABLE_GM           = false
 HIDE_OBJECT         = false
 
-COLOR_PICKER_XML_URL = "https://raw.githubusercontent.com/DedlySpyder/PlayerColorPicker/dev/xml/player_color_picker.xml"
+COLOR_PICKER_XML_URL = "https://raw.githubusercontent.com/DedlySpyder/PlayerColorPicker/0.2.0/xml/player_color_picker.xml"
 
 COLOR_BUTTON_ID_PREFIX = "dedlyPlayerColorPicker_"
 ROW_HEIGHT = 44
