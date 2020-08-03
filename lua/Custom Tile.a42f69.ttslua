@@ -65,14 +65,28 @@ end
 function getColorButtonsXml()
     local buttons = ""
     for _, color in ipairs(CURRENT_COLORS) do
-        if color == "Black" or color == "Brown" then
-            buttons = buttons .. '            <Button id="' .. COLOR_BUTTON_ID_PREFIX .. color ..'" color="' .. color .. '" onClick="{{GUID}}/onChangeColor"><Text color="White">' .. color .. '</Text></Button>\r\n'
-        else
-            buttons = buttons .. '            <Button id="' .. COLOR_BUTTON_ID_PREFIX .. color ..'" color="' .. color .. '" onClick="{{GUID}}/onChangeColor">' .. color .. '</Button>\r\n'
-        end
-
+        local textColor, textValue = getColorButtonValues(color)
+        buttons = buttons .. '            <Button id="' .. COLOR_BUTTON_ID_PREFIX .. color ..'" color="' .. color .. '" onClick="{{GUID}}/onChangeColor"><Text color="' .. textColor .. '">' .. textValue .. '</Text></Button>\r\n'
     end
     return buttons
+end
+
+function getColorButtonValues(color)
+    local textColor = "White"
+    local textValue = color
+
+    if color == "Yellow" or color == "White" then
+        textColor = "Black"
+    end
+
+    if color == "Black" then
+        textValue = "Black (GM)"
+    end
+
+    if color == "Grey" then
+        textValue = "Grey (Spectator)"
+    end
+    return textColor, textValue
 end
 
 function onChangeColor(player, _, color)
