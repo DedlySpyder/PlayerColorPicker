@@ -1,0 +1,5 @@
+            <Panel>
+                <Button id="dedlyPlayerColorPickerSettings{{NUMBER}}_Up" color="Grey" offsetXY="-95 0" width="20" onClick="{{GUID}}/moveColorUp"><Text>↑</Text></Button>
+                <Button id="dedlyPlayerColorPickerSettings{{NUMBER}}_Down" color="Grey" offsetXY="-75 0" width="20" onClick="{{GUID}}/moveColorDown"><Text>↓</Text></Button>
+                <Panel color="{{COLOR}}" offsetXY="20 0" width="167.5"><InputField id="dedlyPlayerColorPickerSettings{{NUMBER}}_Name">{{COLOR_NAME}}</InputField></Panel>
+            </Panel>

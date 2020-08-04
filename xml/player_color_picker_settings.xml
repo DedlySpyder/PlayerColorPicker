@@ -1,0 +1,16 @@
+
+<Panel id="dedlyPlayerColorPickerSettings" padding="5" color="rgba(0.75, 0.75, 0.75, 0.5)" height="{{HEIGHT}}" width="220" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+    <VerticalLayout color="rgb(0.9, 0.9, 0.9)">
+        <Panel>
+            <Text offsetXY="-10 0">Player Color Picker Settings</Text>
+            <Button color="Red" offsetXY="95 0" width="20" onClick="{{GUID}}/closeColorPickerSettings" tooltip="Close" tooltipPosition="Above">X</Button>
+        </Panel>
+        <VerticalLayout id="dedlyPlayerColorPickerColorButtons">
+			{{SETTINGS_ROWS}}
+        </VerticalLayout>
+        <Panel>
+            <Button offsetXY="-52.5 0" width="105" color="Green" onClick="{{GUID}}/confirmColorPickerSettings">Confirm</Button>
+            <Button offsetXY="52.5 0" width="105" color="Red" onClick="{{GUID}}/closeColorPickerSettings">Cancel</Button>
+        </Panel>
+    </VerticalLayout>
+</Panel>
