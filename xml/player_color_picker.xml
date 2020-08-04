@@ -1,11 +1,12 @@
 
-<Panel id="dedlyPlayerColorPicker" padding="5" rectAlignment="MiddleRight" color="rgba(0.75, 0.75, 0.75, 0.5)" height="{{HEIGHT}}" width="200" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+<Panel id="dedlyPlayerColorPicker" padding="5" rectAlignment="MiddleRight" color="rgba(0.75, 0.75, 0.75, 0.5)" height="{{HEIGHT}}" width="220" allowDragging="true" returnToOriginalPositionWhenReleased="false">
     <VerticalLayout color="rgb(0.9, 0.9, 0.9)">
         <Panel>
-            <Button id="dedlyPlayerColorPickerCollapseColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/collapseColorPicker" tooltip="Collapse" tooltipPosition="Above"><Text>↑</Text></Button>
-            <Button id="dedlyPlayerColorPickerExpandColors" color="Grey" offsetXY="-85 0" width="20" onClick="{{GUID}}/expandColorPicker" tooltip="Expand" tooltipPosition="Above"><Text>↓</Text></Button>
-            <Text>Player Color Picker</Text>
-            <Button color="Red" offsetXY="85 0" width="20" onClick="{{GUID}}/closeColorPicker" tooltip="Close" tooltipPosition="Above">X</Button>
+            <Button id="dedlyPlayerColorPickerSettingsToggle" color="Grey" offsetXY="-95 0" width="20" onClick="{{GUID}}/toggleSettings" tooltip="Settings" tooltipPosition="Above"><Text>≡</Text></Button>
+            <Text offsetXY="-10 0">Player Color Picker</Text>
+            <Button id="dedlyPlayerColorPickerCollapseColors" color="Grey" offsetXY="75 0" width="20" onClick="{{GUID}}/collapseColorPicker" tooltip="Collapse" tooltipPosition="Above"><Text>↑</Text></Button>
+            <Button id="dedlyPlayerColorPickerExpandColors" color="Grey" offsetXY="75 0" width="20" onClick="{{GUID}}/expandColorPicker" tooltip="Expand" tooltipPosition="Above"><Text>↓</Text></Button>
+            <Button color="Red" offsetXY="95 0" width="20" onClick="{{GUID}}/closeColorPicker" tooltip="Close" tooltipPosition="Above">X</Button>
         </Panel>
         <VerticalLayout id="dedlyPlayerColorPickerColorButtons">
             {{BUTTONS}}
