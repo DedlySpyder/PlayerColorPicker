@@ -10,15 +10,7 @@ ROW_HEIGHT = 44
 CURRENT_COLORS = {}
 
 function onLoad()
-    CURRENT_COLORS = Player.getAvailableColors()
-
-    if ENABLE_SPECTATOR then
-        table.insert(CURRENT_COLORS, "Grey")
-    end
-
-    if ENABLE_GM then
-        table.insert(CURRENT_COLORS, "Black")
-    end
+    setupCurrentColors()
 
     if not Global.getVar("DEDLY_PLAYER_COLOR_PICKER_ENABLED") then
         WebRequest.get(COLOR_PICKER_XML_URL, addColorPickerXml)
@@ -32,6 +24,34 @@ function onLoad()
     if HIDE_OBJECT then
         hideAbsolutely()
     end
+end
+
+function setupCurrentColors()
+    local colors = Player.getAvailableColors()
+
+    if ENABLE_SPECTATOR then
+        table.insert(colors, "Grey")
+    end
+
+    if ENABLE_GM then
+        table.insert(colors, "Black")
+    end
+
+    local deduped = {}
+    local seen = {}
+    for _, color in ipairs(colors) do
+        if not seen[color] then
+            seen[color] = true
+
+            -- Black can end up in the list if they have a hand zone
+            -- Grey can't currently have a hand zone, but who knows if that will stay true
+            if not ((color == "Black" and not ENABLE_GM) or (color == "Grey" and not ENABLE_SPECTATOR)) then
+                table.insert(deduped, color)
+            end
+        end
+    end
+
+    CURRENT_COLORS = deduped
 end
 
 function hideAbsolutely()
